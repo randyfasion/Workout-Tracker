@@ -43,6 +43,48 @@ router.put('/api/workouts/:id', ({body, params}, res) => {
     });
 });
 
+  // Get most recent workout
+router.get('/api/workouts', (req, res) =>{
+    Workout.find()
+    .then(dbWorkout => {
+        const updatedData = dbWorkout.map(workout=>{
+            const totalDuration = workout.exercises.reduce((acc, curr) => acc+curr.duration, 0)        
+        return {day: workout.day, exercises: workout.exercises, totalDuration, _id: workout._id}
+        })
+        console.log('Updated Data', updatedData);
+            res.json(updatedData);
+     })
+     .catch(err => {
+         res.json(err);
+     })
+ })
+
+
+// Get last 7 workouts
+// Workouts are sorted in chronological order
+router.get('/api/workouts/range', (req, res) => {
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: {
+                    $sum: '$exercises.duration'
+                }
+            }
+        }
+    ])
+    .sort({ _id: 1 })
+    .limit(7)
+    .then(dbWorkout => {
+        console.log("Last 7 workouts", dbWorkout);
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
+
+
+
 
 
 module.exports = router;
