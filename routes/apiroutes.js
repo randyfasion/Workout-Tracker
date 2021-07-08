@@ -26,8 +26,6 @@ router.post('/api/workouts', (req, res) => {
   });
 
   // Update a workout
-// This updates an existing workout's exercises
-// Workout is found by it's ID
 router.put('/api/workouts/:id', ({body, params}, res) => {
     console.log({body});
     Workout.findByIdAndUpdate(
@@ -43,7 +41,7 @@ router.put('/api/workouts/:id', ({body, params}, res) => {
     });
 });
 
-  // Get most recent workout
+  // Get most recent 
 router.get('/api/workouts', (req, res) =>{
     Workout.find()
     .then(dbWorkout => {
@@ -61,7 +59,6 @@ router.get('/api/workouts', (req, res) =>{
 
 
 // Get last 7 workouts
-// Workouts are sorted in chronological order
 router.get('/api/workouts/range', (req, res) => {
     Workout.aggregate([
         {
@@ -75,7 +72,7 @@ router.get('/api/workouts/range', (req, res) => {
     .sort({ _id: 1 })
     .limit(7)
     .then(dbWorkout => {
-        console.log("Last 7 workouts", dbWorkout);
+        console.log("Last 7", dbWorkout);
         res.json(dbWorkout);
     })
     .catch(err => {
