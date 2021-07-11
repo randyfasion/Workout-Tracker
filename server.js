@@ -29,7 +29,7 @@ mongoose.connect(
      
     });
 
-    //routes 
+   
     app.use(require('./routes/view.js'));
     app.use(require('./routes/apiRoutes.js'));
 
