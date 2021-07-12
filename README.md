@@ -29,9 +29,9 @@ Run the following command at the root of your project: npm i OR npm install
 
 ## Preview 
 
-![](pic1.png)
-![](pic2.png)
-![](pic3.png)
+![](./media/pic1.png)
+![](./media/pic2.png)
+![](./media/pic3.png)
 
 ## Questions 
 For issues, questions, and comments please contact randyfaison@gmail.com or visit [https://github.com/Randyfasion](https://github.com/Randyfasion) 
